@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LibraryStoreProcedure.Enums;
 
 namespace LibraryStoreProcedure.Models
 {
@@ -23,14 +24,14 @@ namespace LibraryStoreProcedure.Models
 
             using (IDbConnection connection = new SqlConnection(Helper.ConStr("Books")))
             {
-                connection.Execute("AddBook", param, commandType: CommandType.StoredProcedure);
+                connection.Execute(StoredProcs.AddBook.ToString(), param, commandType: CommandType.StoredProcedure);
             }
         }
         public List<Book> GetBooks()
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConStr("Books")))
             {
-                var books = connection.Query<Book>("GetAllBooks",
+                var books = connection.Query<Book>(StoredProcs.GetAllBooks.ToString(),
                                 commandType: CommandType.StoredProcedure).ToList();
                 return books;
             }
@@ -41,7 +42,7 @@ namespace LibraryStoreProcedure.Models
             param.Add("@Id", book.Id);
             using (IDbConnection connection = new SqlConnection(Helper.ConStr("Books")))
             {
-                connection.Execute("DeleteBook", param, commandType: CommandType.StoredProcedure);
+                connection.Execute(StoredProcs.DeleteBook.ToString(), param, commandType: CommandType.StoredProcedure);
             }
 
         }
@@ -57,7 +58,7 @@ namespace LibraryStoreProcedure.Models
 
             using (IDbConnection connection = new SqlConnection(Helper.ConStr("Books")))
             {
-                connection.Execute("UpdateBook", param, commandType: CommandType.StoredProcedure);
+                connection.Execute(StoredProcs.UpdateBook.ToString(), param, commandType: CommandType.StoredProcedure);
 
             }
         }

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using LibraryStoreProcedure.Connections;
+using LibraryStoreProcedure.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -16,7 +17,7 @@ namespace LibraryStoreProcedure.Models
         {
             using (IDbConnection connection = new SqlConnection(Helper.ConStr("Books")))
             {
-                var countries = connection.Query<Country>("GetAllCountries", 
+                var countries = connection.Query<Country>(StoredProcs.GetAllCountries.ToString(), 
                                 commandType: CommandType.StoredProcedure).ToList();
                 return countries;
             }
