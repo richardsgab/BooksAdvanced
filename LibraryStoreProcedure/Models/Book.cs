@@ -17,7 +17,7 @@ namespace LibraryStoreProcedure.Models
 
         public override string ToString()
         {
-            return $"{Title} {Author} {Price} {CountryId}";
+            return $"{Title} {Author} {Price} {CountryId} {Description}";
         }
     }
 }
